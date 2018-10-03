@@ -1,5 +1,5 @@
 ---
-title: Running Kubernetes on CenturyLink Cloud
+title: CenturyLink Cloud에서 쿠버네티스 구동하기
 ---
 
 {: toc}

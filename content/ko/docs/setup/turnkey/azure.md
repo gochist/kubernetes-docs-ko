@@ -1,8 +1,5 @@
 ---
-reviewers:
-- colemickens
-- brendandburns
-title: Running Kubernetes on Azure
+title: Azure에서 쿠버네티스 구동하기
 ---
 
 ## Azure Container Service

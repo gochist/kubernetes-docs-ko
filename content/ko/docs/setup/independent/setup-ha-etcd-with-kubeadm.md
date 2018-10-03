@@ -1,5 +1,5 @@
 ---
-title: Set up a Highly Availabile etcd Cluster With kubeadm
+title: kubeadm으로 고가용성의 etcd 클러스터 구성하기
 content_template: templates/task
 weight: 60
 ---
@@ -30,7 +30,7 @@ when using kubeadm to set up a kubernetes cluster.
 
 {{% capture steps %}}
 
-## Setting up the cluster
+## 클러스터 구성하기
 
 The general approach is to generate all certs on one node and only distribute
 the *necessary* files to the other nodes.

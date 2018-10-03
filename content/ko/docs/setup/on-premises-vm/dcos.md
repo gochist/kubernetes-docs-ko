@@ -1,5 +1,5 @@
 ---
-title: Kubernetes on DC/OS
+title: DC/OS 상의 쿠버네티스
 content_template: templates/concept
 ---
 
@@ -16,7 +16,7 @@ Mesosphere provides an easy option to provision Kubernetes onto [DC/OS](https://
 
 {{% capture body %}}
 
-## Official Mesosphere Guide
+## 공식 Mesosphere 가이드
 
 The canonical source of getting started on DC/OS is located in the [quickstart repo](https://github.com/mesosphere/dcos-kubernetes-quickstart).
 

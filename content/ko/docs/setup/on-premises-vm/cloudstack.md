@@ -15,7 +15,7 @@ This guide uses a single [Ansible playbook](https://github.com/apachecloudstack/
 
 {{% capture body %}}
 
-## Prerequisites
+## 선행 조건
 
 ```shell
 sudo apt-get install -y python-pip libssl-dev
@@ -51,14 +51,14 @@ method = post
 
 We need to use the http POST method to pass the _large_ userdata to the coreOS instances.
 
-### Clone the playbook
+### playbook을 클론
 
 ```shell
 git clone https://github.com/apachecloudstack/k8s
 cd kubernetes-cloudstack
 ```
 
-### Create a Kubernetes cluster
+### 쿠버네티스 클러스터를 생성
 
 You simply need to run the playbook.
 
@@ -108,7 +108,7 @@ ad13bf84...    <master IP>    role=master
 e9af8293...    <node #2 IP>   role=node
 ```
 
-## Support Level
+## 기술 지원 수준
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

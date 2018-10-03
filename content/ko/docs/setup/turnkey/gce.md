@@ -1,5 +1,5 @@
 ---
-title: Running Kubernetes on Google Compute Engine
+title: Google Compute Engine에서 쿠버네티스 구동하기
 content_template: templates/task
 ---
 

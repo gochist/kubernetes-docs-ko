@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting kubeadm
+title: kubeadm 문제 해결
 content_template: templates/concept
 weight: 70
 ---
@@ -22,7 +22,7 @@ If your problem is not listed below, please follow the following steps:
 
 {{% capture body %}}
 
-## `ebtables` or some similar executable not found during installation
+## 설치 중에 `ebtables`이나 유사한 실행 파일이 없음
 
 If you see the following warnings while running `kubeadm init`
 
@@ -36,7 +36,7 @@ Then you may be missing `ebtables`, `ethtool` or a similar executable on your no
 - For Ubuntu/Debian users, run `apt install ebtables ethtool`.
 - For CentOS/Fedora users, run `yum install ebtables ethtool`.
 
-## kubeadm blocks waiting for control plane during installation
+## kubeadm이 컨트롤 플레인 설치 중에 멈추어서 대기하고 있음 
 
 If you notice that `kubeadm init` hangs after printing out the following line:
 
@@ -65,7 +65,7 @@ This may be caused by a number of problems. The most common are:
 
 - control plane Docker containers are crashlooping or hanging. You can check this by running `docker ps` and investigating each container by running `docker logs`.
 
-## kubeadm blocks when removing managed containers
+## kubeadm이 쿠버네티스가 관리하는 컨테이너를 삭제하는 중 멈춤
 
 The following could happen if Docker halts and does not remove any Kubernetes-managed containers:
 
@@ -91,7 +91,7 @@ Inspecting the logs for docker may also be useful:
 journalctl -ul docker
 ```
 
-## Pods in `RunContainerError`, `CrashLoopBackOff` or `Error` state
+## `RunContainerError`, `CrashLoopBackOff` 또는 `Error` 상태의 파드
 
 Right after `kubeadm init` there should not be any pods in these states.
 
@@ -105,14 +105,14 @@ Right after `kubeadm init` there should not be any pods in these states.
   might have to grant it more RBAC privileges or use a newer version. Please file
   an issue in the Pod Network providers' issue tracker and get the issue triaged there.
 
-## `coredns` (or `kube-dns`) is stuck in the `Pending` state
+## `coredns` (또는 `kube-dns`)이 `Pending` 상태에서 멈춤
 
 This is **expected** and part of the design. kubeadm is network provider-agnostic, so the admin
 should [install the pod network solution](/docs/concepts/cluster-administration/addons/)
 of choice. You have to install a Pod Network
 before CoreDNS may deployed fully. Hence the `Pending` state before the network is set up.
 
-## `HostPort` services do not work
+## `HostPort` 서비스가 작동하지 않음
 
 The `HostPort` and `HostIP` functionality is available depending on your Pod Network
 provider. Please contact the author of the Pod Network solution to find out whether
@@ -125,7 +125,7 @@ For more information, see the [CNI portmap documentation](https://github.com/con
 If your network provider does not support the portmap CNI plugin, you may need to use the [NodePort feature of
 services](/docs/concepts/services-networking/service/#nodeport) or use `HostNetwork=true`.
 
-## Pods are not accessible via their Service IP
+## 서비스 IP를 통해 파드에 접근할 수 없음
 
 - Many network add-ons do not yet enable [hairpin mode](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/#a-pod-cannot-reach-itself-via-service-ip)
   which allows pods to access themselves via their Service IP. This is an issue related to
@@ -138,7 +138,7 @@ services](/docs/concepts/services-networking/service/#nodeport) or use `HostNetw
   is to modify `/etc/hosts`, see this [Vagrantfile](https://github.com/errordeveloper/k8s-playground/blob/22dd39dfc06111235620e6c4404a96ae146f26fd/Vagrantfile#L11)
   for an example.
 
-## TLS certificate errors
+## TLS 인증서 에러
 
 The following error indicates a possible certificate mismatch.
 
@@ -159,7 +159,7 @@ Unable to connect to the server: x509: certificate signed by unknown authority (
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
   ```
 
-## Default NIC When using flannel as the pod network in Vagrant
+## Vagrant에서 flannel을 파드 네트워크로 쓰는 경우 기본 NIC
 
 The following error might indicate that something was wrong in the pod network:
 
@@ -173,7 +173,7 @@ Error from server (NotFound): the server could not find the requested resource
 
   This may lead to problems with flannel, which defaults to the first interface on a host. This leads to all hosts thinking they have the same public IP address. To prevent this, pass the `--iface eth1` flag to flannel so that the second interface is chosen.
 
-## Non-public IP used for containers
+## 컨테이너에서 Non-public IP 사용
 
 In some situations `kubectl logs` and `kubectl run` commands may return with the following errors in an otherwise functional cluster:
 
@@ -199,7 +199,7 @@ Error from server: Get https://10.19.0.41:10250/containerLogs/default/mysql-ddc6
   systemctl restart kubelet
   ```
 
-## Services with externalTrafficPolicy=Local are not reachable
+## externalTrafficPolicy=Local 서비스에 접근할 수 없음
 
 On nodes where the hostname for the kubelet is overridden using the `--hostname-override` option, kube-proxy will default to treating 127.0.0.1 as the node IP, which results in rejecting connections for Services configured for `externalTrafficPolicy=Local`. This situation can be verified by checking the output of `kubectl -n kube-system logs <kube-proxy pod name>`:
 
@@ -239,7 +239,7 @@ EOF
 
 ```
 
-## `coredns` pods have `CrashLoopBackOff` or `Error` state
+## `coredns` 파드가 `CrashLoopBackOff` 또는 `Error` 상태임
 
 If you have nodes that are running SELinux with an older version of Docker you might experience a scenario
 where the `coredns` pods are not starting. To solve that you can try one of the following options:

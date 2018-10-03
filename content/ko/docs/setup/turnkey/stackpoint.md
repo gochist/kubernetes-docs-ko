@@ -1,7 +1,5 @@
 ---
-reviewers:
-- baldwinspc
-title: Running Kubernetes on Multiple Clouds with Stackpoint.io
+title: Stackpoint.io로 멀티 클라우드에서 쿠버네티스 구동하기
 content_template: templates/concept
 ---
 

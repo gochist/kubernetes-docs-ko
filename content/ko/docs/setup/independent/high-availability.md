@@ -1,5 +1,5 @@
 ---
-title: Creating Highly Available Clusters with kubeadm
+title: kubeadm으로 고가용성 클러스터 생성하기
 content_template: templates/task
 weight: 50
 ---
@@ -56,7 +56,7 @@ needed.
 
 {{% capture steps %}}
 
-## First steps for both methods
+## 두 가지 방법 모두에 공통적인 첫 단계
 
 {{< note >}}
 **Note**: All commands in this guide on any control plane or etcd node should be
@@ -67,7 +67,7 @@ run as root.
    documentation](/docs/setup/independent/create-cluster-kubeadm/#pod-network).
    The example uses Calico, so the pod CIDR is `192.168.0.0/16`.
 
-### Configure SSH
+### SSH 설정
 
 1.  Enable ssh-agent on your main device that has access to all other nodes in
     the system:
@@ -97,7 +97,7 @@ run as root.
         sudo -E -s
         ```
 
-### Create load balancer for kube-apiserver
+### kube-apiserver를 위한 로드 밸런서 생성
 
 {{< note >}}
 **Note**: There are many configurations for load balancers. The following
@@ -133,9 +133,9 @@ different configuration.
 
 1.  Add the remaining control plane nodes to the load balancer target group.
 
-## Stacked control plane nodes
+## 스택으로 쌓은 컨트롤 플레인 노드
 
-### Bootstrap the first stacked control plane node
+### 첫 번째 스택의 컨트롤 플레인 노드를 기동
 
 {{< note >}}
 **Note**: Optionally replace `stable` with a different version of Kubernetes, for example `v1.12.0`.
@@ -177,7 +177,7 @@ different configuration.
 
 1.  Run `kubeadm init --config kubeadm-config.yaml`
 
-### Copy required files to other control plane nodes
+### 다른 컨트롤 플레인 노드에 필요한 파일을 복사
 
 The following certificates and other required files were created when you ran `kubeadm init`.
 Copy these files to your other control plane nodes:
@@ -218,7 +218,7 @@ done
 **Note**: Remember that your config may differ from this example.
 {{< /note >}}
 
-### Add the second stacked control plane node
+### 두 번째 스택의 컨트롤 플레인 노드를 추가
 
 1.  Create a second, different `kubeadm-config.yaml` template file:
 
@@ -307,7 +307,7 @@ done
     kubeadm alpha phase mark-master --config kubeadm-config.yaml
     ```
 
-### Add the third stacked control plane node
+### 세 번째 스택의 컨트롤 플레인 노드 추가
 
 1.  Create a third, different `kubeadm-config.yaml` template file:
 
@@ -394,14 +394,14 @@ done
     kubeadm alpha phase mark-master --config kubeadm-config.yaml
     ```
 
-## External etcd
+## 외부 etcd
 
-### Set up the cluster
+### 클러스터 구축
 
 - Follow [these instructions](/docs/setup/independent/setup-ha-etcd-with-kubeadm/)
    to set up the etcd cluster.
 
-#### Copy required files from an etcd node to all control plane nodes
+#### etcd 노드에서 모든 컨트롤 플레인 노드로 필요한 파일 복사
 
 In the following example, replace `USER` and `CONTROL_PLANE_HOSTS` values with values
 for your environment.
@@ -425,7 +425,7 @@ for host in $CONTROL_PLANE_HOSTS; do
 done
 ```
 
-### Set up the first control plane node
+### 첫 번째 컨트롤 플레인 노드 구축
 
 1.  Extract the etcd certificates
 
@@ -468,7 +468,7 @@ done
 1.  Run `kubeadm init --config kubeadm-config.yaml`
 1.  Copy the output join commamnd.
 
-### Copy required files to the correct locations
+### 정확한 위치에 필요한 파일을 복사
 
 The following pki files were created during the `kubeadm init` step and must be shared with
 all other control plane nodes.
@@ -504,7 +504,7 @@ for host in ${CONTROL_PLANE_IPS}; do
 done
 ```
 
-### Set up the other control plane nodes
+### 나머지 컨트롤 플레인 노드 구축
 
 1.  Extract the required certificates
 
@@ -530,15 +530,15 @@ done
 
         kubeadm join ha.k8s.example.com:6443 --token 5ynki1.3erp9i3yo7gqg1nv --discovery-token-ca-cert-hash sha256:a00055bd8c710a9906a3d91b87ea02976334e1247936ac061d867a0f014ecd81 --experimental-control-plane
 
-## Common tasks after bootstrapping control plane
+## 컨트롤 플레인 부트 이후 공통적인 작업
 
-### Install a pod network
+### 파드 네트워크 설치
 
 [Follow these instructions](/docs/setup/independent/create-cluster-kubeadm/#pod-network) to install
 the pod network. Make sure this corresponds to whichever pod CIDR you provided
 in the master configuration file.
 
-### Install workers
+### 워커 설치
 
 Each worker node can now be joined to the cluster with the command returned from any of the
 `kubeadm init` commands.

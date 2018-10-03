@@ -1,8 +1,5 @@
 ---
-reviewers:
-- colemickens
-- brendandburns
-title: Running Kubernetes on Alibaba Cloud
+title: Alibaba 클라우드에서 쿠버네티스 구동하기
 ---
 
 ## Alibaba Cloud Container Service

@@ -1,5 +1,5 @@
 ---
-title: Customizing control plane configuration with kubeadm
+title: kubeadm을 통해 컨트롤 플레인 구성을 커스터마이즈하기
 content_template: templates/concept
 weight: 40
 ---
@@ -24,7 +24,7 @@ For more details on each field in the configuration you can navigate to our
 
 {{% capture body %}}
 
-## APIServer flags
+## APIServer 플래그
 
 For details, see the [reference documentation for kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/).
 
@@ -42,7 +42,7 @@ apiServerExtraArgs:
   audit-log-path: /home/johndoe/audit.log
 ```
 
-## ControllerManager flags
+## ControllerManager 플래그
 
 For details, see the [reference documentation for kube-controller-manager](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/).
 
@@ -59,7 +59,7 @@ controllerManagerExtraArgs:
   deployment-controller-sync-period: 50
 ```
 
-## Scheduler flags
+## Scheduler 플래그
 
 For details, see the [reference documentation for kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/).
 
